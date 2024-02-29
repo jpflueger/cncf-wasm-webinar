@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cncf-wasm-webinar
+  labels:
+    name: cncf-wasm-webinar
+spec:
+  defaultBackend:
+    service:
+      name: cncf-wasm-webinar
+      port:
+        number: 80

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cncf-wasm-webinar
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cncf-wasm-webinar
+  template:
+    metadata:
+      labels:
+        app: cncf-wasm-webinar
+    spec:
+      runtimeClassName: wasmtime-spin-v2
+      containers:
+      - name: cncf-wasm-webinar
+        image: ttl.sh/cncf-wasm-webinar:0.1.0
+        command: ["/"]
+        imagePullPolicy: IfNotPresent
