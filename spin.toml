@@ -17,3 +17,25 @@ allowed_outbound_hosts = []
 command = "cargo build --target wasm32-wasi --release"
 workdir = "rust-func"
 watch = ["src/**/*.rs", "Cargo.toml"]
+
+[[trigger.http]]
+route = "/js/..."
+component = "js-func"
+
+[component.js-func]
+source = "js-func/target/js-func.wasm"
+[component.js-func.build]
+command = "npm run build"
+workdir = "js-func"
+
+[[trigger.http]]
+route = "/go/..."
+component = "go-func"
+
+[component.go-func]
+source = "go-func/main.wasm"
+allowed_outbound_hosts = []
+[component.go-func.build]
+command = "tinygo build -target=wasi -gc=leaking -no-debug -o main.wasm main.go"
+workdir = "go-func"
+watch = ["**/*.go", "go.mod"]

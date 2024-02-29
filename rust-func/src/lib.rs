@@ -8,6 +8,6 @@ fn handle_rust_func(req: Request) -> anyhow::Result<impl IntoResponse> {
     Ok(Response::builder()
         .status(200)
         .header("content-type", "text/plain")
-        .body("Hello, CNCF Webinar")
+        .body("Hello, CNCF Webinar from Rust")
         .build())
 }
