@@ -1,0 +1,19 @@
+spin_manifest_version = 2
+
+[application]
+name = "cncf-wasm-webinar"
+version = "0.1.0"
+authors = ["Justin Pflueger <justin.pflueger@fermyon.com>"]
+description = "Sample application for CNCF Webinar"
+
+[[trigger.http]]
+route = "/rs/..."
+component = "rust-func"
+
+[component.rust-func]
+source = "rust-func/target/wasm32-wasi/release/rust_func.wasm"
+allowed_outbound_hosts = []
+[component.rust-func.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "rust-func"
+watch = ["src/**/*.rs", "Cargo.toml"]
